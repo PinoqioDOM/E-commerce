@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import Logo from '../assets/logo.png';
 import Cart from '../assets/shopping-icon.png';
@@ -10,14 +10,12 @@ const Navbar = () => {
     e.preventDefault();
     if (searchQuery.trim()) {
       console.log('Search submitted:', searchQuery);
-      // Add your search logic here, e.g., API call or navigation
     }
   };
 
   const handleSearchChange = (e) => {
     setSearchQuery(e.target.value);
     console.log('Live search:', e.target.value);
-    // Add your live search logic here, e.g., filtering or API call
   };
 
   return (
@@ -39,16 +37,16 @@ const Navbar = () => {
         </form>
 
         <div className="nav-right">
-          <Link to="/cart" className="cart-link">
+          <NavLink to="/cart" className={({ isActive }) => isActive ? 'cart-link active' : 'cart-link'}>
             <div className="cart-icon-wrapper">
               <img src={Cart} alt="Cart" width="30px" />
               <span className="cart-count">0</span>
             </div>
             <span>კალათა</span>
-          </Link>
+          </NavLink>
 
           <Link to="/login" className="auth-link">
-            შესვლა
+            👤 შესვლა
           </Link>
         </div>
       </div>
