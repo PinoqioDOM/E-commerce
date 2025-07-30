@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import '../design/login.css'
 
 const Login = () => {
   const [activeTab, setActiveTab] = useState('login');
