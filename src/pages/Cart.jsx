@@ -1,17 +1,30 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { mockProducts } from '../Product.js';
 import '../design/Cart.css';
 
 const Cart = () => {
+  // mockProducts-ის პირველი 2 პროდუქტი კალათაში
   const [cartItems, setCartItems] = useState([
     {
-      id: 1,
-      name: "Eva Solo, Multi, ალუმინის ქვაბი, 3.6 ლ",
-      price: 263.73,
-      oldPrice: 447.95,
-      discount: 41,
+      id: mockProducts[0].id,
+      name: mockProducts[0].nameGe,
+      price: mockProducts[0].price,
+      oldPrice: mockProducts[0].originalPrice,
+      discount: Math.round(((mockProducts[0].originalPrice - mockProducts[0].price) / mockProducts[0].originalPrice) * 100),
       quantity: 1,
-      image: "/your-product-image.jpg"
+      image: mockProducts[0].image,
+      brand: mockProducts[0].brand
+    },
+    {
+      id: mockProducts[1].id,
+      name: mockProducts[1].nameGe,
+      price: mockProducts[1].price,
+      oldPrice: mockProducts[1].originalPrice,
+      discount: Math.round(((mockProducts[1].originalPrice - mockProducts[1].price) / mockProducts[1].originalPrice) * 100),
+      quantity: 2,
+      image: mockProducts[1].image,
+      brand: mockProducts[1].brand
     }
   ]);
 
@@ -56,7 +69,7 @@ const Cart = () => {
   return (
     <div className="cart-page">
       <div className="cart-container">
-        <h1 style={{textAlign:'start'}}>შენს კალათაში  {getTotalItems()} ნივთია</h1>
+        <h1 style={{textAlign:'start'}}>შენს კალათაში {getTotalItems()} ნივთია</h1>
         
         <div className="cart-content">
           <div className="cart-items">
@@ -65,6 +78,7 @@ const Cart = () => {
                 <img src={item.image} alt={item.name} className="product-img-full" />
                 
                 <div className="item-details">
+                  <p className="brand-name">{item.brand}</p>
                   <h3>{item.name}</h3>
                   <div className="price-section">
                     <strong className="current-price">{item.price} ₾</strong>
