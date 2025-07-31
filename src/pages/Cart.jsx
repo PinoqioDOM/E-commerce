@@ -1,10 +1,9 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { mockProducts } from '../Product.js';
+import { mockProducts } from '../components/Product';
 import '../design/Cart.css';
 
 const Cart = () => {
-  // mockProducts-ის პირველი 2 პროდუქტი კალათაში
   const [cartItems, setCartItems] = useState([
     {
       id: mockProducts[0].id,

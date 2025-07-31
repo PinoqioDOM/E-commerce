@@ -1,7 +1,7 @@
 import { mockProducts } from '../Product.js';
 
 const ProductCard = ({ product, onAddToCart }) => {
-  // თუ product არ არის გადმოცემული, გამოიყენე პირველი mockProduct
+  
   const productData = product || mockProducts[0];
 
   const discountPercentage = productData.originalPrice > productData.price 

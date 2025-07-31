@@ -1,4 +1,5 @@
-import { mockProducts } from '../Product.js';
+import { mockProducts } from '../components/Product';
+import '../design/Products.css'
 
 const Products = () => {
   return (

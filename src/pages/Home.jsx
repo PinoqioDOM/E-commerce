@@ -1,7 +1,7 @@
-import { mockProducts } from '../Product.js';
+import { mockProducts } from '../components/Product';
 
 const Home = () => {
-  const featuredProducts = mockProducts.slice(0, 3); // პირველი 3 პროდუქტი
+  const featuredProducts = mockProducts.slice(0, 3);
   const discountedProducts = mockProducts.filter(product => product.originalPrice > product.price);
 
   return (
@@ -12,6 +12,31 @@ const Home = () => {
           <h1>მოგესალმებით ჩვენს მაღაზიაში</h1>
           <p>იპოვეთ საუკეთესო ტექნიკა და გაკეთეთ ონლაინ შოპინგი</p>
           <button className="hero-btn">შოპინგის დაწყება</button>
+        </div>
+      </section>
+
+            {/* Categories Section */}
+      <section className="categories-section">
+        <div className="container">
+          <h2>კატეგორიები</h2>
+          <div className="categories-grid">
+            <div className="category-card">
+              <h3>სმარტფონები</h3>
+              <p>{mockProducts.filter(p => p.category === 'smartphones').length} პროდუქტი</p>
+            </div>
+            <div className="category-card">
+              <h3>ლეპტოპები</h3>
+              <p>{mockProducts.filter(p => p.category === 'laptops').length} პროდუქტი</p>
+            </div>
+            <div className="category-card">
+              <h3>ყურსასმენები</h3>
+              <p>{mockProducts.filter(p => p.category === 'headphones').length} პროდუქტი</p>
+            </div>
+            <div className="category-card">
+              <h3>ტაბლეტები</h3>
+              <p>{mockProducts.filter(p => p.category === 'tablets').length} პროდუქტი</p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -96,30 +121,7 @@ const Home = () => {
         </div>
       </section>
 
-      {/* Categories Section */}
-      <section className="categories-section">
-        <div className="container">
-          <h2>კატეგორიები</h2>
-          <div className="categories-grid">
-            <div className="category-card">
-              <h3>სმარტფონები</h3>
-              <p>{mockProducts.filter(p => p.category === 'smartphones').length} პროდუქტი</p>
-            </div>
-            <div className="category-card">
-              <h3>ლეპტოპები</h3>
-              <p>{mockProducts.filter(p => p.category === 'laptops').length} პროდუქტი</p>
-            </div>
-            <div className="category-card">
-              <h3>ყურსასმენები</h3>
-              <p>{mockProducts.filter(p => p.category === 'headphones').length} პროდუქტი</p>
-            </div>
-            <div className="category-card">
-              <h3>ტაბლეტები</h3>
-              <p>{mockProducts.filter(p => p.category === 'tablets').length} პროდუქტი</p>
-            </div>
-          </div>
-        </div>
-      </section>
+
     </div>
   );
 };
