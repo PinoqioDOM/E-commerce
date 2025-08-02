@@ -1,77 +1,38 @@
-import { useState } from 'react'
-import Logo from '../assets/Logo.png'
-import Login from '../pages/Login'
+import { Link } from "react-router-dom";
+import Logo from "../assets/Logo.png";
 
 const Header = () => {
-  const [showLogin, setShowLogin] = useState(false)
-
-  const handleLoginClick = () => {
-    setShowLogin(true)
-  }
-
-  const handleCloseLogin = () => {
-    setShowLogin(false)
-  }
-
   return (
-    <>
-      <div className='navbar-container'>
-        <img src={Logo} alt="Veli Logo" className='logo' />
-        
-        <div className="search-wrapper">
-          <input
-            type="text"
-            name="search"
-            id="search"
-            className='search-input'
-            placeholder='რას ეძებ?'
-          />
-          <i className="fa-solid fa-magnifying-glass search-icon fa-xl"></i>
-        </div>
-
-        <div className="basket">
-          <div className='nav-item cart glass-button'>
-            <i className="fa-solid fa-basket-shopping fa-lg"></i>
-            <span className='count'>0</span>
-            <span>კალათა</span>
-          </div>
-        </div>
-
-        <nav>
-          <div className='login-btn glass-button'>
-            <i className="fa-solid fa-circle-user fa-lg"></i>
-            <span onClick={handleLoginClick}>შესვლა</span>
-          </div>
-        </nav>
+    <div className="flex items-center justify-center gap-8 px-4 bg-[#90EE90] relative">
+      <img src={Logo} alt="Veli Logo" className="w-[150px] cursor-pointer" />
+      
+      <div className="relative flex items-center">
+        <input
+          type="text"
+          name="search"
+          id="search"
+          className="p-4 text-base border-none rounded-lg outline-none bg-white w-[700px] transition-shadow hover:shadow-[0_0_10px_#000] cursor-pointer"
+          placeholder="რას ეძებ?"
+        />
+        <i className="fa-solid fa-magnifying-glass absolute right-2.5 text-[#555] pointer-events-none text-base"></i>
       </div>
 
-      {/* Modal overlay for Login component */}
-      {showLogin && (
-        <div 
-          className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
-          onClick={handleCloseLogin}
-        >
-          <div 
-            className="relative bg-white rounded-2xl shadow-lg max-w-md w-full mx-4"
-            onClick={(e) => e.stopPropagation()}
-          >
-            {/* Close button */}
-            <button
-              onClick={handleCloseLogin}
-              className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold z-10"
-            >
-              ×
-            </button>
-            
-            {/* Login component content */}
-            <div className="p-8">
-              <Login />
-            </div>
-          </div>
+      <div className="relative">
+        <div className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/10 backdrop-blur-lg hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:bg-white hover:font-bold transition-all">
+          <i className="fa-solid fa-basket-shopping text-lg absolute"></i>
+          <span className="relative top-[-10px] left-5 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">0</span>
+          <span>კალათა</span>
         </div>
-      )}
-    </>
-  )
-}
+      </div>
 
-export default Header
+      <nav>
+        <div className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/10 backdrop-blur-lg hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:bg-white hover:font-bold transition-all">
+          <i className="fa-solid fa-circle-user text-lg"></i>
+          <Link to="/login" className="text-[#333] no-underline">შესვლა</Link>
+        </div>
+      </nav>
+    </div>
+  );
+};
+
+export default Header;
