@@ -4,17 +4,18 @@ import Home from "./pages/Home"
 import Login from "./pages/Login"
 import Cart from "./pages/Cart"
 import Checkout from "./pages/Checkout"
+import Error from "./pages/Error"
 
 function App() {
-
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/cart" element={<Cart />}/>
-          <Route path="/checkout" element={<Checkout />}/>
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="*" element={<Error />} />
         </Route>
       </Routes>
     </BrowserRouter>
