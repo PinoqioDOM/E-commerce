@@ -6,7 +6,7 @@ import CartModal from "./CartModal";
 const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartButtonRef = useRef(null);
-  const cartItemCount = 1;
+  const [cartItemCount, setCartItemCount] = useState(1);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
@@ -16,11 +16,18 @@ const Header = () => {
     setIsCartOpen(false);
   };
 
+  const handleRemoveProduct = () => {
+    setCartItemCount(0);
+    setIsCartOpen(false);
+  };
+
   return (
     <div className="relative">
       <div className="flex items-center justify-center gap-8 px-4 bg-[#90EE90] relative">
-        <img src={Logo} alt="Veli Logo" className="w-[150px] cursor-pointer" />
-        
+        <Link to='/'>
+          <img src={Logo} alt="Veli Logo" className="w-[150px] cursor-pointer" />
+        </Link>
+
         <div className="relative flex items-center">
           <input
             type="text"
@@ -35,7 +42,7 @@ const Header = () => {
         <div className="relative" ref={cartButtonRef}>
           <div 
             onClick={handleCartClick}
-            className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/10 backdrop-blur-lg hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:bg-white hover:font-bold transition-all"
+            className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight"
           >
             <i className="fa-solid fa-basket-shopping text-lg"></i>
             <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full font-bold">
@@ -44,18 +51,18 @@ const Header = () => {
             <span>კალათა</span>
           </div>
           
-          {/* Cart Modal positioned relative to this container */}
           {isCartOpen && (
             <CartModal 
               isOpen={isCartOpen} 
               onClose={handleCloseCart}
               cartButtonRef={cartButtonRef}
+              onRemoveProduct={handleRemoveProduct}
             />
           )}
         </div>
         
         <nav>
-          <div className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/10 backdrop-blur-lg hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:bg-white hover:font-bold transition-all">
+          <div className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight">
             <i className="fa-solid fa-circle-user text-lg"></i>
             <Link to="/login" className="text-[#333] no-underline">შესვლა</Link>
           </div>

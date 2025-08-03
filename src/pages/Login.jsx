@@ -14,8 +14,8 @@ const Login = () => {
   };
 
   return (
-    <div className="fixed inset-0 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="w-full max-w-md mx-auto p-8 bg-white rounded-[20px] shadow-[0_10px_30px_rgba(0,0,0,0.2)] relative">
+    <div className="fixed inset-0 bg-black/20 backdrop-blur-sm flex items-center justify-center z-50">
+      <div className="w-full max-w-md mx-auto p-8 bg-white rounded-[20px] shadow-xl relative animate-in">
         <button
           onClick={() => navigate("/")}
           className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 text-2xl font-bold z-10 cursor-pointer"
@@ -28,7 +28,7 @@ const Login = () => {
 
         <div className="flex border-b border-gray-200 mb-6">
           <button
-            className={`flex-1 py-3 text-center font-medium transition-all border-b-2 ${
+            className={`flex-1 py-3 text-center font-medium transition-colors border-b-2 ${
               isLogin
                 ? "text-black border-black font-bold"
                 : "text-gray-500 border-transparent hover:text-gray-700"
@@ -38,7 +38,7 @@ const Login = () => {
             ავტორიზაცია
           </button>
           <button
-            className={`flex-1 py-3 text-center font-medium transition-all border-b-2 ${
+            className={`flex-1 py-3 text-center font-medium transition-colors border-b-2 ${
               !isLogin
                 ? "text-black border-black font-bold"
                 : "text-gray-500 border-transparent hover:text-gray-700"
@@ -49,11 +49,12 @@ const Login = () => {
           </button>
         </div>
 
-        <div className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-4">
           <input
             type="email"
             placeholder="მეილი*"
             className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-600 transition-colors"
+            required
           />
 
           {!isLogin && (
@@ -62,11 +63,13 @@ const Login = () => {
                 type="text"
                 placeholder="სახელი, გვარი*"
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-600 transition-colors"
+                required
               />
               <input
                 type="tel"
                 placeholder="მობილურის ნომერი*"
                 className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-600 transition-colors"
+                required
               />
             </>
           )}
@@ -76,13 +79,15 @@ const Login = () => {
               type={showPassword ? "text" : "password"}
               placeholder="პაროლი*"
               className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-600 transition-colors"
+              required
             />
-            <span
+            <button
+              type="button"
               onClick={() => setShowPassword(!showPassword)}
               className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-lg text-gray-600 hover:text-gray-800 transition-colors"
             >
               {showPassword ? "🙈" : "👁️"}
-            </span>
+            </button>
           </div>
 
           {!isLogin && (
@@ -91,13 +96,15 @@ const Login = () => {
                 type={showConfirm ? "text" : "password"}
                 placeholder="გაიმეორე პაროლი*"
                 className="w-full px-4 py-3 pr-12 border border-gray-300 rounded-xl focus:outline-none focus:border-gray-600 transition-colors"
+                required
               />
-              <span
+              <button
+                type="button"
                 onClick={() => setShowConfirm(!showConfirm)}
                 className="absolute right-4 top-1/2 transform -translate-y-1/2 cursor-pointer text-lg text-gray-600 hover:text-gray-800 transition-colors"
               >
                 {showConfirm ? "🙈" : "👁️"}
-              </span>
+              </button>
             </div>
           )}
 
@@ -108,12 +115,12 @@ const Login = () => {
           )}
 
           <button
-            onClick={handleSubmit}
+            type="submit"
             className="w-full py-4 bg-black text-white font-bold rounded-xl hover:bg-gray-800 transition-colors mt-6 cursor-pointer"
           >
             {isLogin ? "შესვლა" : "რეგისტრაცია"}
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );
