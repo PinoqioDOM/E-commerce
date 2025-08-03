@@ -10,7 +10,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(isLogin ? "ავტორიზაცია" : "რეგისტრაცია");
-    navigate("/"); // Redirect to home after submission
+    navigate("/"); 
   };
 
   return (
