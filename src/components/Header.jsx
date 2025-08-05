@@ -1,4 +1,3 @@
-// Header.jsx
 import React, { useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
@@ -10,12 +9,12 @@ const Header = () => {
   const cartButtonRef = useRef(null);
   const [cartItemCount, setCartItemCount] = useState(1);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [isUserModalOpen, setIsUserModalOpen] = useState(false); 
-  const userButtonRef = useRef(null); 
+  const [isUserModalOpen, setIsUserModalOpen] = useState(false);
+  const userButtonRef = useRef(null);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
-    setIsUserModalOpen(false); 
+    setIsUserModalOpen(false);
   };
 
   const handleCloseCart = () => {
@@ -27,12 +26,6 @@ const Header = () => {
     setIsCartOpen(false);
   };
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-    setIsCartOpen(false); 
-    setIsUserModalOpen(true); 
-  };
-
   const handleLogout = () => {
     setIsLoggedIn(false);
     setIsUserModalOpen(false);
@@ -40,7 +33,7 @@ const Header = () => {
 
   const handleUserModalClick = () => {
     setIsUserModalOpen(!isUserModalOpen);
-    setIsCartOpen(false); 
+    setIsCartOpen(false);
   };
 
   return (
@@ -92,18 +85,17 @@ const Header = () => {
               <span>ჩემი ველი</span>
             </div>
           ) : (
-            <div
-              onClick={handleLogin} 
+            <Link to="/login" 
               className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight"
             >
               <i className="fa-solid fa-circle-user text-lg"></i>
-              <Link to="/login" className="text-[#333] no-underline">შესვლა</Link>
-            </div>
+              <p className="text-[#333] no-underline">შესვლა</p>
+            </Link>
           )}
-          
+
           {isUserModalOpen && (
-            <UserModal 
-              isOpen={isUserModalOpen} 
+            <UserModal
+              isOpen={isUserModalOpen}
               onClose={() => setIsUserModalOpen(false)}
               onLogout={handleLogout}
             />

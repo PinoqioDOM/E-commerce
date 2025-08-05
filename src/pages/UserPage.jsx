@@ -1,4 +1,3 @@
-// src/pages/UserPage.jsx
 import React from 'react';
 import { Outlet } from 'react-router-dom';
 import UserSidebar from '../components/UserSidebar';
