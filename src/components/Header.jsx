@@ -4,13 +4,15 @@ import Logo from '../assets/Logo.png';
 import CartModal from './CartModal';
 import UserModal from './UserModal';
 
-const Header = () => {
+const Header = ({ onAddToCart, onAddToWishlist }) => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartButtonRef = useRef(null);
-  const [cartItemCount, setCartItemCount] = useState(1);
+  const [cartItemCount, setCartItemCount] = useState(0);
+  const [cartItems, setCartItems] = useState([]);
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const userButtonRef = useRef(null);
+  const [wishlistItems, setWishlistItems] = useState([]);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
@@ -21,9 +23,19 @@ const Header = () => {
     setIsCartOpen(false);
   };
 
+  const handleAddToCart = (product) => {
+    setCartItems([...cartItems, product]);
+    setCartItemCount(cartItems.length + 1);
+  };
+
   const handleRemoveProduct = () => {
+    setCartItems([]);
     setCartItemCount(0);
     setIsCartOpen(false);
+  };
+
+  const handleAddToWishlist = (product) => {
+    setWishlistItems([...wishlistItems, product]);
   };
 
   const handleLogout = () => {
@@ -70,6 +82,7 @@ const Header = () => {
               isOpen={isCartOpen}
               onClose={handleCloseCart}
               cartButtonRef={cartButtonRef}
+              cartItems={cartItems}
               onRemoveProduct={handleRemoveProduct}
             />
           )}

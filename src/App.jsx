@@ -12,6 +12,7 @@ import UserWishlist from "./components/UserWishlist"
 import UserReturns from "./components/UserReturns"
 import UserAddress from "./components/UserAddress"
 import UserNotifications from "./components/UserNotifications"
+import Product from "./pages/Product"
 
 
 function App() {
