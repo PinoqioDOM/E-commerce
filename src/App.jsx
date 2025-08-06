@@ -14,17 +14,17 @@ import UserAddress from "./components/UserAddress"
 import UserNotifications from "./components/UserNotifications"
 import Product from "./pages/Product"
 
-
 function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Layout />}>
+        
           <Route index element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/cart" element={<Cart />} />
           <Route path="/checkout" element={<Checkout />} />
-          
+
           <Route path="/user" element={<UserPage />}>
             <Route index element={<UserSettings />} /> 
             <Route path="orders" element={<UserOrders />} />
@@ -34,7 +34,8 @@ function App() {
             <Route path="notifications" element={<UserNotifications />} />
             <Route path="settings" element={<UserSettings />} />
           </Route>
-          
+
+          <Route path="/product/:id" element={<Product />} />
           <Route path="*" element={<Error />} />
         </Route>
       </Routes>
