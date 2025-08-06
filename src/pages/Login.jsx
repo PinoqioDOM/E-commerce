@@ -1,15 +1,21 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from 'react-redux';
+import { login } from '../store/authSlice';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirm, setShowConfirm] = useState(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(isLogin ? "ავტორიზაცია" : "რეგისტრაცია");
+    // აქ უნდა იყოს შენი ავტორიზაციის/რეგისტრაციის ლოგიკა (მაგ., API-ს გამოძახება)
+    // მაგალითად, თუ ფორმა სწორადაა შევსებული:
+    dispatch(login()); // ავტორიზაციის/რეგისტრაციის წარმატების შემდეგ
     navigate("/"); 
   };
 

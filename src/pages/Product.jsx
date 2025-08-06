@@ -8,9 +8,10 @@ import headphones from '../data/products/headphones.js'
 import printers from '../data/products/printers.js'
 import gaming from '../data/products/gaming.js'
 
-const Product = ({ onAddToCart, onAddToWishlist }) => {
+// default ღირებულებები დაემატა props-ებს error-ის თავიდან ასაცილებლად
+const Product = ({ onAddToCart = () => {}, onAddToWishlist = () => {} }) => {
   const { id } = useParams()
-  const allProducts = [...laptops, ...desktops, ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming]
+  const allProducts = [...laptops,  ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming]
   const product = allProducts.find(p => p.id === parseInt(id))
 
   if (!product) return <div>პროდუქტი არ მოიძებნა</div>

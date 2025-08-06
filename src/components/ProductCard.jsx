@@ -1,8 +1,10 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import { useCart } from '../context/CartContext'
 
-const ProductCard = ({ product, onAddToCart, onAddToWishlist }) => {
+const ProductCard = ({ product }) => {
   const navigate = useNavigate()
+  const { addToCart, addToWishlist } = useCart()
 
   const handleClick = () => {
     navigate(`/product/${product.id}`)
@@ -10,12 +12,12 @@ const ProductCard = ({ product, onAddToCart, onAddToWishlist }) => {
 
   const handleAddToCart = (e) => {
     e.stopPropagation()
-    onAddToCart(product)
+    addToCart(product)
   }
 
   const handleAddToWishlist = (e) => {
     e.stopPropagation()
-    onAddToWishlist(product)
+    addToWishlist(product)
   }
 
   return (

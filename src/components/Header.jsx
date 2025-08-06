@@ -3,16 +3,18 @@ import { Link } from 'react-router-dom';
 import Logo from '../assets/Logo.png';
 import CartModal from './CartModal';
 import UserModal from './UserModal';
+import { useSelector, useDispatch } from 'react-redux';
+import { login, logout } from '../store/authSlice';
+import { useCart } from '../context/CartContext';
 
-const Header = ({ onAddToCart, onAddToWishlist }) => {
+const Header = () => {
   const [isCartOpen, setIsCartOpen] = useState(false);
   const cartButtonRef = useRef(null);
-  const [cartItemCount, setCartItemCount] = useState(0);
-  const [cartItems, setCartItems] = useState([]);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { cartItems, cartItemCount, removeFromCart } = useCart();
+  const isLoggedIn = useSelector((state) => state.auth.isLoggedIn);
+  const dispatch = useDispatch();
   const [isUserModalOpen, setIsUserModalOpen] = useState(false);
   const userButtonRef = useRef(null);
-  const [wishlistItems, setWishlistItems] = useState([]);
 
   const handleCartClick = () => {
     setIsCartOpen(true);
@@ -23,23 +25,8 @@ const Header = ({ onAddToCart, onAddToWishlist }) => {
     setIsCartOpen(false);
   };
 
-  const handleAddToCart = (product) => {
-    setCartItems([...cartItems, product]);
-    setCartItemCount(cartItems.length + 1);
-  };
-
-  const handleRemoveProduct = () => {
-    setCartItems([]);
-    setCartItemCount(0);
-    setIsCartOpen(false);
-  };
-
-  const handleAddToWishlist = (product) => {
-    setWishlistItems([...wishlistItems, product]);
-  };
-
   const handleLogout = () => {
-    setIsLoggedIn(false);
+    dispatch(logout());
     setIsUserModalOpen(false);
   };
 
@@ -83,13 +70,20 @@ const Header = ({ onAddToCart, onAddToWishlist }) => {
               onClose={handleCloseCart}
               cartButtonRef={cartButtonRef}
               cartItems={cartItems}
-              onRemoveProduct={handleRemoveProduct}
+              onRemoveProduct={removeFromCart}
             />
           )}
         </div>
 
         <nav className="relative" ref={userButtonRef}>
-          {isLoggedIn ? (
+          {!isLoggedIn ? (
+            <Link to="/login" 
+              className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight"
+            >
+              <i className="fa-solid fa-circle-user text-lg"></i>
+              <p className="text-[#333] no-underline">შესვლა</p>
+            </Link>
+          ) : (
             <div
               onClick={handleUserModalClick}
               className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight"
@@ -97,13 +91,6 @@ const Header = ({ onAddToCart, onAddToWishlist }) => {
               <i className="fa-solid fa-circle-user text-lg"></i>
               <span>ჩემი ველი</span>
             </div>
-          ) : (
-            <Link to="/login" 
-              className="flex items-center gap-4 cursor-pointer text-[#333] font-medium text-base p-3 rounded-xl bg-white/20 backdrop-blur-lg border border-white/10 hover:bg-white/30 hover:scale-[1.03] hover:shadow-[0_0_10px_#fff] hover:border-2 hover:border-white hover:font-bold transition-all slideRight"
-            >
-              <i className="fa-solid fa-circle-user text-lg"></i>
-              <p className="text-[#333] no-underline">შესვლა</p>
-            </Link>
           )}
 
           {isUserModalOpen && (

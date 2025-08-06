@@ -10,6 +10,7 @@ import printers from '../data/products/printers.js'
 import gaming from '../data/products/gaming.js'
 import { useNavigate } from 'react-router-dom'
 
+// onAddToCart და onAddToWishlist props-ები შენარჩუნებულია Home-ში
 const Home = ({ onAddToCart, onAddToWishlist }) => {
   const navigate = useNavigate()
   const allProducts = [...laptops, ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming]
@@ -31,7 +32,8 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
 
       {categories.map((category) => {
         const categoryProducts = allProducts.filter(p => p.categoryId === category.id)
-        const visibleProducts = categoryProducts.slice(0, 5) 
+        const visibleProducts = categoryProducts.slice(0, 4)
+
         if (visibleProducts.length > 0) {
           return (
             <div key={category.id} className="mb-8">
@@ -49,7 +51,7 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
               {categoryProducts.length > 5 && (
                 <button
                   onClick={() => navigate(`/category/${category.id}`)}
-                  className="mt-2 text-blue-500 hover:underline"
+                  className="mt-2 text-blue-500 hover:underline cursor-pointer"
                 >
                   ნახე ყველა 
                 </button>
