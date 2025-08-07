@@ -9,9 +9,7 @@ import UserPage from "./pages/UserPage"
 import UserSettings from "./components/UserSettings"
 import UserOrders from "./components/UserOrders"
 import UserWishlist from "./components/UserWishlist"
-import UserReturns from "./components/UserReturns"
 import UserAddress from "./components/UserAddress"
-import UserNotifications from "./components/UserNotifications"
 import Product from "./pages/Product"
 import { Provider } from 'react-redux'
 import { CartProvider } from './context/CartContext';
@@ -34,9 +32,7 @@ function App() {
                 <Route index element={<UserSettings />} />
                 <Route path="orders" element={<UserOrders />} />
                 <Route path="wishlist" element={<UserWishlist />} />
-                <Route path="returns" element={<UserReturns />} />
                 <Route path="address" element={<UserAddress />} />
-                <Route path="notifications" element={<UserNotifications />} />
                 <Route path="settings" element={<UserSettings />} />
                 <Route path="addproduct" element={<UserAddProduct />} /> 
               </Route>

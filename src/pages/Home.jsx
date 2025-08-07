@@ -62,14 +62,14 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
 
       {categories.map((category) => {
         const categoryProducts = allProducts.filter(p => p.categoryId === category.id);
-        const visibleProducts = categoryProducts.slice(0, 5);
+        const visibleProducts = categoryProducts.slice(0, 4);
 
         if (visibleProducts.length > 0) {
           return (
             <div key={category.id} className="mb-8">
-              <div className="flex justify-between items-center mb-4">
+              <div className="flex justify-between items-center mb-4 w-full">
                 <h2 className="text-2xl font-bold">{category.name}</h2>
-                {categoryProducts.length > 5 && (
+                {categoryProducts.length > 4 && (
                   <button
                     onClick={() => navigate(`/category/${category.id}`)}
                     className="text-blue-500 hover:underline cursor-pointer"
@@ -78,7 +78,9 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
                   </button>
                 )}
               </div>
-              <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+              
+              {/* Desktop View - Grid Layout */}
+              <div className="hidden lg:grid lg:grid-cols-4 gap-10 w-full">
                 {visibleProducts.map((product) => (
                   <ProductCard
                     key={product.id}
@@ -87,6 +89,33 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
                     onAddToWishlist={onAddToWishlist}
                   />
                 ))}
+              </div>
+
+              {/* Tablet View - 2 columns */}
+              <div className="hidden md:grid lg:hidden md:grid-cols-2 gap-4">
+                {visibleProducts.map((product) => (
+                  <ProductCard
+                    key={product.id}
+                    product={product}
+                    onAddToCart={onAddToCart}
+                    onAddToWishlist={onAddToWishlist}
+                  />
+                ))}
+              </div>
+
+              {/* Mobile View - Horizontal Scroll */}
+              <div className="md:hidden">
+                <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
+                  {visibleProducts.map((product) => (
+                    <div key={product.id} className="flex-shrink-0 w-64">
+                      <ProductCard
+                        product={product}
+                        onAddToCart={onAddToCart}
+                        onAddToWishlist={onAddToWishlist}
+                      />
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           );
