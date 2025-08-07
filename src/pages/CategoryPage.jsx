@@ -22,11 +22,6 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
             module = await import('../data/products/laptops.js');
             name = 'ლეპტოპები';
             break;
-          case '2':
-            // დესკტოპების კოდი ამოღებულია
-            module = { default: [] };
-            name = 'პროდუქტები';
-            break;
           case '3':
             module = await import('../data/products/monitors.js');
             name = 'მონიტორები';
@@ -120,7 +115,7 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
       {products.length === 0 ? (
         <div className="p-4 text-center">ამ კატეგორიაში პროდუქტი არ მოიძებნა.</div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {products.map((product) => (
             <ProductCard
               key={product.id}

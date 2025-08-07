@@ -11,6 +11,7 @@ import UserOrders from "./components/UserOrders"
 import UserWishlist from "./components/UserWishlist"
 import UserAddress from "./components/UserAddress"
 import Product from "./pages/Product"
+import CategoryPage from "./pages/CategoryPage"
 import { Provider } from 'react-redux'
 import { CartProvider } from './context/CartContext';
 import { store } from './store'
@@ -24,19 +25,20 @@ function App() {
           <Routes>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
+              <Route path="/category/:id" element={<CategoryPage />} />
               <Route path="/login" element={<Login />} />
               <Route path="/cart" element={<Cart />} />
               <Route path="/checkout" element={<Checkout />} />
-                          
+              
               <Route path="/user" element={<UserPage />}>
                 <Route index element={<UserSettings />} />
                 <Route path="orders" element={<UserOrders />} />
                 <Route path="wishlist" element={<UserWishlist />} />
                 <Route path="address" element={<UserAddress />} />
                 <Route path="settings" element={<UserSettings />} />
-                <Route path="addproduct" element={<UserAddProduct />} /> 
+                <Route path="addproduct" element={<UserAddProduct />} />
               </Route>
-
+              
               <Route path="/product/:id" element={<Product />} />
               <Route path="*" element={<Error />} />
             </Route>
