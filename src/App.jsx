@@ -16,37 +16,39 @@ import Product from "./pages/Product"
 import { Provider } from 'react-redux'
 import { CartProvider } from './context/CartContext';
 import { store } from './store'
+import UserAddProduct from "./components/UserAddProduct"
 
 function App() {
- return (
-   <Provider store={store}>
-     <CartProvider>
-       <BrowserRouter>
-         <Routes>
-           <Route path="/" element={<Layout />}>
-             <Route index element={<Home />} />
-             <Route path="/login" element={<Login />} />
-             <Route path="/cart" element={<Cart />} />
-             <Route path="/checkout" element={<Checkout />} />
-                     
-             <Route path="/user" element={<UserPage />}>
-               <Route index element={<UserSettings />} />
-               <Route path="orders" element={<UserOrders />} />
-               <Route path="wishlist" element={<UserWishlist />} />
-               <Route path="returns" element={<UserReturns />} />
-               <Route path="address" element={<UserAddress />} />
-               <Route path="notifications" element={<UserNotifications />} />
-               <Route path="settings" element={<UserSettings />} />
-             </Route>
+  return (
+    <Provider store={store}>
+      <CartProvider>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<Layout />}>
+              <Route index element={<Home />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/cart" element={<Cart />} />
+              <Route path="/checkout" element={<Checkout />} />
+                          
+              <Route path="/user" element={<UserPage />}>
+                <Route index element={<UserSettings />} />
+                <Route path="orders" element={<UserOrders />} />
+                <Route path="wishlist" element={<UserWishlist />} />
+                <Route path="returns" element={<UserReturns />} />
+                <Route path="address" element={<UserAddress />} />
+                <Route path="notifications" element={<UserNotifications />} />
+                <Route path="settings" element={<UserSettings />} />
+                <Route path="addproduct" element={<UserAddProduct />} /> 
+              </Route>
 
-             <Route path="/product/:id" element={<Product />} />
-             <Route path="*" element={<Error />} />
-           </Route>
-         </Routes>
-       </BrowserRouter>
-     </CartProvider>
-   </Provider>
- )
+              <Route path="/product/:id" element={<Product />} />
+              <Route path="*" element={<Error />} />
+            </Route>
+          </Routes>
+        </BrowserRouter>
+      </CartProvider>
+    </Provider>
+  )
 }
 
 export default App
