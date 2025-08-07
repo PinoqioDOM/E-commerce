@@ -32,6 +32,10 @@ export const CartProvider = ({ children }) => {
     setCartItems(prev => prev.filter(item => item.id !== productId));
   };
 
+  const clearCart = () => { // ეს არის ის ფუნქცია, რაც გვჭირდება კალათის გასასუფთავებლად!
+    setCartItems([]);
+  };
+
   const addToWishlist = (product) => {
     setWishlistItems(prev => {
       if (prev.find(item => item.id === product.id)) {
@@ -50,6 +54,7 @@ export const CartProvider = ({ children }) => {
     wishlistItems,
     addToCart,
     removeFromCart,
+    clearCart, 
     addToWishlist,
     removeFromWishlist,
     cartItemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)

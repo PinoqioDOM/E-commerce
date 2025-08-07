@@ -1,5 +1,4 @@
-import React from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate,} from 'react-router-dom';
 import laptops from '../data/products/laptops.js';
 import monitors from '../data/products/monitors.js';
 import keyboards from '../data/products/keyboards.js';
@@ -11,7 +10,7 @@ import { useCart } from '../context/CartContext.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 
 const Product = () => {
-  const { addToCart } = useCart();
+  const { addToCart, cartItemCount } = useCart();
   const { id } = useParams();
   const allProducts = [...laptops, ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
   const product = allProducts.find(p => p.id === parseInt(id));
@@ -20,6 +19,11 @@ const Product = () => {
   if (!product) return <div>პროდუქტი არ მოიძებნა</div>;
 
   const categoryProducts = allProducts.filter(p => p.categoryId === product.categoryId && p.id !== product.id).slice(0, 5);
+
+  const handleBuyNow = () => {
+    addToCart(product);
+    navigate('/checkout');
+  };
 
   return (
     <div className="flex flex-col p-4 gap-8 max-w-7xl mx-auto">
@@ -111,8 +115,9 @@ const Product = () => {
             >
               დაამატე კალათაში
             </button>
-            <button
-              className="w-full bg-black text-white p-3 rounded-lg font-semibold hover:bg-gray-800 transition-colors cursor-pointer"
+            <button 
+              onClick={handleBuyNow} 
+              className="flex-1 w-full bg-blue-600 text-white text-center py-3 px-4 rounded-lg font-bold hover:bg-blue-700 transition-colors cursor-pointer"
             >
               ყიდვა
             </button>
