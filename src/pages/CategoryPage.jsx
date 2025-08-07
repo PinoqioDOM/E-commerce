@@ -2,10 +2,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import categories from '../data/categories.js';
+import FilterComponent from '../components/FilterComponent.jsx'; 
 
 const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
   const { id } = useParams();
-  const [products, setProducts] = useState([]);
+  const [allProducts, setAllProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryName, setCategoryName] = useState('პროდუქტები');
   const [isLoading, setIsLoading] = useState(true);
   const scrollContainerRef = useRef(null);
@@ -21,6 +23,10 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
           case '1':
             module = await import('../data/products/laptops.js');
             name = 'ლეპტოპები';
+            break;
+          case '2':
+            module = await import('../data/products/computer.js');
+            name = 'კომპიუტერბი';
             break;
           case '3':
             module = await import('../data/products/monitors.js');
@@ -50,17 +56,18 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
             module = { default: [] };
             name = 'პროდუქტები';
         }
-        setProducts(module.default);
+        setAllProducts(module.default);
+        setFilteredProducts(module.default);
         setCategoryName(name);
       } catch (error) {
         console.error("პროდუქტების ჩატვირთვის შეცდომა:", error);
-        setProducts([]);
+        setAllProducts([]);
+        setFilteredProducts([]);
         setCategoryName('პროდუქტები');
       } finally {
         setIsLoading(false);
       }
     };
-
     fetchProducts();
   }, [id]);
 
@@ -76,12 +83,17 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
     }
   };
 
+  const handleFilterChange = (newProducts) => {
+    setFilteredProducts(newProducts);
+  };
+
   if (isLoading) {
     return <div className="p-4 text-center">იტვირთება...</div>;
   }
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
+      {/* კატეგორიების სქროლი */}
       <div className="relative flex items-center mb-8">
         <button
           onClick={scrollLeft}
@@ -112,20 +124,29 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
       </div>
 
       <h1 className="text-3xl font-bold mb-6">{categoryName}</h1>
-      {products.length === 0 ? (
-        <div className="p-4 text-center">ამ კატეგორიაში პროდუქტი არ მოიძებნა.</div>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
-          {products.map((product) => (
-            <ProductCard
-              key={product.id}
-              product={product}
-              onAddToCart={onAddToCart}
-              onAddToWishlist={onAddToWishlist}
-            />
-          ))}
+
+      <div className="flex gap-8">
+        {/* ფილტრის კომპონენტის გამოძახება */}
+        <FilterComponent products={allProducts} onFilterChange={handleFilterChange} />
+        
+        {/* პროდუქტების სია */}
+        <div className="flex-grow">
+          {filteredProducts.length === 0 ? (
+            <div className="p-4 text-center">ამ კრიტერიუმებით პროდუქტი არ მოიძებნა.</div>
+          ) : (
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+              {filteredProducts.map((product) => (
+                <ProductCard
+                  key={product.id}
+                  product={product}
+                  onAddToCart={onAddToCart}
+                  onAddToWishlist={onAddToWishlist}
+                />
+              ))}
+            </div>
+          )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
