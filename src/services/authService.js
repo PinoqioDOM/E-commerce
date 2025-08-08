@@ -16,7 +16,6 @@ export const loginUser = async (credentials) => {
     }
 
     const data = await response.json();
-    // ტოკენის შენახვა localStorage-ში ან სხვაგან
     localStorage.setItem('authToken', data.token);
     return data;
   } catch (error) {
