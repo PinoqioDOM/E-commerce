@@ -1,0 +1,110 @@
+const API_BASE_URL = 'http://localhost:8000/api';
+
+const getAuthHeaders = () => {
+  const token = localStorage.getItem('authToken');
+  return {
+    'Content-Type': 'application/json',
+    ...(token && { 'Authorization': `Bearer ${token}` }),
+  };
+};
+
+export const getProducts = async () => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'პროდუქტების მიღების შეცდომა');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('პროდუქტების მიღების შეცდომა:', error);
+    throw error;
+  }
+};
+
+export const getProductById = async (productId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/${productId}`, {
+      method: 'GET',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'პროდუქტის მიღების შეცდომა');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`პროდუქტის ${productId} მიღების შეცდომა:`, error);
+    throw error;
+  }
+};
+
+export const addProduct = async (productData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products`, {
+      method: 'POST',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'პროდუქტის დამატების შეცდომა');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error('პროდუქტის დამატების შეცდომა:', error);
+    throw error;
+  }
+};
+
+export const updateProduct = async (productId, productData) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/${productId}`, {
+      method: 'PUT',
+      headers: getAuthHeaders(),
+      body: JSON.stringify(productData),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'პროდუქტის განახლების შეცდომა');
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error(`პროდუქტის ${productId} განახლების შეცდომა:`, error);
+    throw error;
+  }
+};
+
+export const deleteProduct = async (productId) => {
+  try {
+    const response = await fetch(`${API_BASE_URL}/products/${productId}`, {
+      method: 'DELETE',
+      headers: getAuthHeaders(),
+    });
+
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(errorData.message || 'პროდუქტის წაშლის შეცდომა');
+    }
+
+    return { success: true, message: 'პროდუქტი წარმატებით წაიშალა' };
+  } catch (error) {
+    console.error(`პროდუქტის ${productId} წაშლის შეცდომა:`, error);
+    throw error;
+  }
+};
