@@ -22,6 +22,7 @@ const authSlice = createSlice({
     status: 'idle',
     error: null,
   },
+  
   reducers: {
     logout: (state) => {
       state.isLoggedIn = false;

@@ -4,7 +4,7 @@ import Logo from '../assets/Logo.png';
 import CartModal from './CartModal';
 import UserModal from './UserModal';
 import { useSelector, useDispatch } from 'react-redux';
-import { login, logout } from '../store/authSlice';
+import { userLogin, logout } from '../store/authSlice';
 import { useCart } from '../context/CartContext';
 
 const Header = () => {
