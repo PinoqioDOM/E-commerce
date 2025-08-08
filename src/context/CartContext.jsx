@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from 'react';
+import React, { createContext, useContext, useState, useEffect } from 'react';
 
 const CartContext = createContext();
 
@@ -11,8 +11,47 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
-  const [cartItems, setCartItems] = useState([]);
-  const [wishlistItems, setWishlistItems] = useState([]);
+  const [cartItems, setCartItems] = useState(() => {
+    try {
+      const localData = localStorage.getItem('cartItems');
+      return localData ? JSON.parse(localData) : [];
+    } catch (error) {
+      console.error("Failed to parse cartItems from localStorage", error);
+      return [];
+    }
+  });
+
+  const [wishlistItems, setWishlistItems] = useState(() => {
+    try {
+      const localData = localStorage.getItem('wishlistItems');
+      return localData ? JSON.parse(localData) : [];
+    } catch (error) {
+      console.error("Failed to parse wishlistItems from localStorage", error);
+      return [];
+    }
+  });
+
+  const [orders, setOrders] = useState(() => {
+    try {
+      const localData = localStorage.getItem('userOrders');
+      return localData ? JSON.parse(localData) : [];
+    } catch (error) {
+      console.error("Failed to parse userOrders from localStorage", error);
+      return [];
+    }
+  });
+
+  useEffect(() => {
+    localStorage.setItem('cartItems', JSON.stringify(cartItems));
+  }, [cartItems]);
+
+  useEffect(() => {
+    localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
+  }, [wishlistItems]);
+
+  useEffect(() => {
+    localStorage.setItem('userOrders', JSON.stringify(orders));
+  }, [orders]);
 
   const addToCart = (product) => {
     setCartItems(prev => {
@@ -32,7 +71,7 @@ export const CartProvider = ({ children }) => {
     setCartItems(prev => prev.filter(item => item.id !== productId));
   };
 
-  const clearCart = () => { // ეს არის ის ფუნქცია, რაც გვჭირდება კალათის გასასუფთავებლად!
+  const clearCart = () => {
     setCartItems([]);
   };
 
@@ -49,14 +88,20 @@ export const CartProvider = ({ children }) => {
     setWishlistItems(prev => prev.filter(item => item.id !== productId));
   };
 
+  const addOrder = (order) => {
+    setOrders(prevOrders => [...prevOrders, order]);
+  };
+
   const value = {
     cartItems,
     wishlistItems,
+    orders, 
     addToCart,
     removeFromCart,
-    clearCart, 
+    clearCart,
     addToWishlist,
     removeFromWishlist,
+    addOrder, 
     cartItemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
   };
 
