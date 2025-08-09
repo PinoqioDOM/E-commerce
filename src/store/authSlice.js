@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginUser, removeAuthToken, getAuthToken, registerUser } from '../services/authService';
+import { loginUser, removeAuthToken, getAuthToken, registerUser, getCurrentUser, updateUser, changePassword } from '../services/authService';
 
 export const userLogin = createAsyncThunk(
   'auth/login',
@@ -21,6 +21,42 @@ export const userRegister = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'ვერ მოხერხდა რეგისტრაცია');
+    }
+  }
+);
+
+export const fetchCurrentUser = createAsyncThunk(
+  'auth/fetchCurrentUser',
+  async (_, { rejectWithValue }) => {
+    try {
+      const user = await getCurrentUser();
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.message || 'მომხმარებლის მონაცემების მიღება ვერ მოხერხდა');
+    }
+  }
+);
+
+export const updateUserProfile = createAsyncThunk(
+  'auth/updateUser',
+  async (updatedData, { rejectWithValue }) => {
+    try {
+      const user = await updateUser(updatedData);
+      return user;
+    } catch (error) {
+      return rejectWithValue(error.message || 'მომხმარებლის მონაცემების განახლება ვერ მოხერხდა');
+    }
+  }
+);
+
+export const changeUserPassword = createAsyncThunk(
+  'auth/changePassword',
+  async (passwordData, { rejectWithValue }) => {
+    try {
+      await changePassword(passwordData);
+      return 'პაროლი წარმატებით შეიცვალა';
+    } catch (error) {
+      return rejectWithValue(error.message || 'პაროლის შეცვლა ვერ მოხერხდა');
     }
   }
 );
@@ -83,6 +119,38 @@ const authSlice = createSlice({
         state.isLoggedIn = false;
         state.token = null;
         state.user = null;
+      })
+      .addCase(fetchCurrentUser.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(fetchCurrentUser.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      .addCase(fetchCurrentUser.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || 'მომხმარებლის მონაცემების მიღება ვერ მოხერხდა';
+      })
+      .addCase(updateUserProfile.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(updateUserProfile.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      .addCase(updateUserProfile.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || 'მონაცემების განახლება ვერ მოხერხდა';
+      })
+      .addCase(changeUserPassword.pending, (state) => {
+        state.status = 'loading';
+      })
+      .addCase(changeUserPassword.fulfilled, (state) => {
+        state.status = 'succeeded';
+      })
+      .addCase(changeUserPassword.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || 'პაროლის განახლება ვერ მოხერხდა';
       });
   },
 });

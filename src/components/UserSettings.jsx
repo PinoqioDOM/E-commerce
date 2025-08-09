@@ -1,17 +1,19 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchCurrentUser, updateUserProfile, changeUserPassword } from '../store/authSlice';
 
 const UserSettings = () => {
-  // იუზერის მონაცემების მართვა
-  const [userData, setUserData] = useState({
-    name: 'Tornike Alxanixhvili',
-    email: 'alxanixhvili1995@gmail.ru',
-    phone: 'არ არის მითითებული'
-  });
+  const dispatch = useDispatch();
+  const { user, status, error } = useSelector((state) => state.auth);
 
   const [isEditingName, setIsEditingName] = useState(false);
-  const [isEditingEmail, setIsEditingEmail] = useState(false);
   const [isEditingPhone, setIsEditingPhone] = useState(false);
   const [isChangingPassword, setIsChangingPassword] = useState(false);
+
+  const [updatedData, setUpdatedData] = useState({
+    name: '',
+    phone: '',
+  });
 
   const [passwordForm, setPasswordForm] = useState({
     currentPassword: '',
@@ -19,29 +21,31 @@ const UserSettings = () => {
     confirmPassword: ''
   });
 
+  useEffect(() => {
+    if (user) {
+      setUpdatedData({
+        name: user.name || '',
+        phone: user.phone || '',
+      });
+    } else {
+      dispatch(fetchCurrentUser());
+    }
+  }, [user, dispatch]);
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setUserData(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    setUpdatedData(prevData => ({ ...prevData, [name]: value }));
   };
 
   const handlePasswordChange = (e) => {
     const { name, value } = e.target;
-    setPasswordForm(prevData => ({
-      ...prevData,
-      [name]: value
-    }));
+    setPasswordForm(prevData => ({ ...prevData, [name]: value }));
   };
 
   const handleEditClick = (field) => {
     switch (field) {
       case 'name':
         setIsEditingName(true);
-        break;
-      case 'email':
-        setIsEditingEmail(true);
         break;
       case 'phone':
         setIsEditingPhone(true);
@@ -55,20 +59,20 @@ const UserSettings = () => {
   };
 
   const handleSaveClick = (field) => {
-    console.log(`ცვლილებები შენახულია: ${field}`);
+    let dataToUpdate = {};
     switch (field) {
       case 'name':
+        dataToUpdate = { name: updatedData.name };
         setIsEditingName(false);
         break;
-      case 'email':
-        setIsEditingEmail(false);
-        break;
       case 'phone':
+        dataToUpdate = { phone: updatedData.phone };
         setIsEditingPhone(false);
         break;
       default:
-        break;
+        return;
     }
+    dispatch(updateUserProfile(dataToUpdate));
   };
 
   const handleSavePassword = () => {
@@ -76,22 +80,23 @@ const UserSettings = () => {
       alert("პაროლები არ ემთხვევა!");
       return;
     }
-    console.log("პაროლი წარმატებით შეიცვალა!");
+    dispatch(changeUserPassword({
+      currentPassword: passwordForm.currentPassword,
+      newPassword: passwordForm.newPassword
+    }));
     setIsChangingPassword(false);
     setPasswordForm({ currentPassword: '', newPassword: '', confirmPassword: '' });
   };
 
   const handleCancelClick = (field) => {
-    console.log(`ცვლილება გაუქმებულია: ${field}`);
     switch (field) {
       case 'name':
         setIsEditingName(false);
-        break;
-      case 'email':
-        setIsEditingEmail(false);
+        setUpdatedData(prevData => ({ ...prevData, name: user?.name || '' }));
         break;
       case 'phone':
         setIsEditingPhone(false);
+        setUpdatedData(prevData => ({ ...prevData, phone: user?.phone || '' }));
         break;
       case 'password':
         setIsChangingPassword(false);
@@ -102,10 +107,18 @@ const UserSettings = () => {
     }
   };
 
+  if (status === 'loading' && !user) {
+    return <div>მონაცემები იტვირთება...</div>;
+  }
+
+  if (error) {
+    return <div>შეცდომა: {error}</div>;
+  }
+
   return (
     <div className="flex-1 p-8 bg-white rounded-lg shadow-md">
       <h2 className="text-2xl font-bold mb-6">პარამეტრები</h2>
-      
+
       <div className="flex space-x-4 mb-6">
         <button
           onClick={() => handleEditClick('password')}
@@ -170,41 +183,8 @@ const UserSettings = () => {
         <div className="flex justify-between items-center border-t pt-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">ელ. ფოსტა</label>
-            {isEditingEmail ? (
-              <input
-                type="email"
-                name="email"
-                value={userData.email}
-                onChange={handleInputChange}
-                className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
-              />
-            ) : (
-              <p className="mt-1 text-gray-900">{userData.email}</p>
-            )}
+            <p className="mt-1 text-gray-900">{user?.email}</p>
           </div>
-          {isEditingEmail ? (
-            <div className="flex gap-2">
-              <button
-                onClick={() => handleSaveClick('email')}
-                className="text-sm font-medium text-green-600 hover:underline"
-              >
-                შენახვა
-              </button>
-              <button
-                onClick={() => handleCancelClick('email')}
-                className="text-sm font-medium text-red-600 hover:underline"
-              >
-                გაუქმება
-              </button>
-            </div>
-          ) : (
-            <button
-              onClick={() => handleEditClick('email')}
-              className="text-sm font-medium text-green-600 hover:underline"
-            >
-              შეცვლა
-            </button>
-          )}
         </div>
 
         <div className="flex justify-between items-center border-t pt-4">
@@ -214,12 +194,12 @@ const UserSettings = () => {
               <input
                 type="text"
                 name="name"
-                value={userData.name}
+                value={updatedData.name}
                 onChange={handleInputChange}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
               />
             ) : (
-              <p className="mt-1 text-gray-900">{userData.name}</p>
+              <p className="mt-1 text-gray-900">{user?.name}</p>
             )}
           </div>
           {isEditingName ? (
@@ -254,12 +234,12 @@ const UserSettings = () => {
               <input
                 type="tel"
                 name="phone"
-                value={userData.phone}
+                value={updatedData.phone}
                 onChange={handleInputChange}
                 className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-green-500 focus:border-green-500 sm:text-sm"
               />
             ) : (
-              <p className="mt-1 text-gray-900">{userData.phone}</p>
+              <p className="mt-1 text-gray-900">{user?.phone || 'არ არის მითითებული'}</p>
             )}
           </div>
           {isEditingPhone ? (
