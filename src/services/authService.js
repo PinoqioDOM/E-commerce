@@ -1,4 +1,4 @@
-const API_BASE_URL = 'http://localhost:8000/api'; 
+const API_BASE_URL = 'http://localhost:3000/api'; 
 
 export const loginUser = async (credentials) => {
   try {
@@ -16,7 +16,7 @@ export const loginUser = async (credentials) => {
     }
 
     const data = await response.json();
-    localStorage.setItem('authToken', data.token);
+    localStorage.setItem('authToken', data.access_token);
     return data;
   } catch (error) {
     console.error('შესვლის შეცდომა:', error);

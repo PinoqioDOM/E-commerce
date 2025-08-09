@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import { userLogin, logout, clearAuthError } from '../store/authSlice';
+import { userLogin, logout, clearAuthError, userRegister } from '../store/authSlice';
 
 const Login = () => {
   const [isLogin, setIsLogin] = useState(true);
@@ -53,8 +53,7 @@ const Login = () => {
       if (formData.password !== formData.confirmPassword) {
         return;
       }
-      console.log("რეგისტრაციის მონაცემები:", formData);
-      alert("რეგისტრაციის ლოგიკა არ არის სრულად იმპლემენტირებული ამ მაგალითში.");
+      dispatch(userRegister(formData));
     }
   };
 

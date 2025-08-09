@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
-import { loginUser, removeAuthToken, getAuthToken } from '../services/authService';
+import { loginUser, removeAuthToken, getAuthToken, registerUser } from '../services/authService';
 
 export const userLogin = createAsyncThunk(
   'auth/login',
@@ -9,6 +9,18 @@ export const userLogin = createAsyncThunk(
       return data;
     } catch (error) {
       return rejectWithValue(error.message || 'ვერ მოხერხდა შესვლა');
+    }
+  }
+);
+
+export const userRegister = createAsyncThunk(
+  'auth/register',
+  async (userData, { rejectWithValue }) => {
+    try {
+      const data = await registerUser(userData);
+      return data;
+    } catch (error) {
+      return rejectWithValue(error.message || 'ვერ მოხერხდა რეგისტრაცია');
     }
   }
 );
@@ -45,12 +57,29 @@ const authSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isLoggedIn = true;
-        state.token = action.payload.token;
+        state.token = action.payload.access_token;
         state.user = action.payload.user || null;
       })
       .addCase(userLogin.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'შესვლა ვერ მოხერხდა';
+        state.isLoggedIn = false;
+        state.token = null;
+        state.user = null;
+      })
+      .addCase(userRegister.pending, (state) => {
+        state.status = 'loading';
+        state.error = null;
+      })
+      .addCase(userRegister.fulfilled, (state, action) => {
+        state.status = 'succeeded';
+        state.isLoggedIn = true;
+        state.token = action.payload.access_token;
+        state.user = action.payload.user || null;
+      })
+      .addCase(userRegister.rejected, (state, action) => {
+        state.status = 'failed';
+        state.error = action.payload || 'რეგისტრაცია ვერ მოხერხდა';
         state.isLoggedIn = false;
         state.token = null;
         state.user = null;
