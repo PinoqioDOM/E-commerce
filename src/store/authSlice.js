@@ -93,7 +93,7 @@ const authSlice = createSlice({
       .addCase(userLogin.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isLoggedIn = true;
-        state.token = action.payload.access_token;
+        state.token = action.payload.access_token || state.token;
         state.user = action.payload.user || null;
       })
       .addCase(userLogin.rejected, (state, action) => {
@@ -110,7 +110,7 @@ const authSlice = createSlice({
       .addCase(userRegister.fulfilled, (state, action) => {
         state.status = 'succeeded';
         state.isLoggedIn = true;
-        state.token = action.payload.access_token;
+        state.token = action.payload.access_token || state.token;
         state.user = action.payload.user || null;
       })
       .addCase(userRegister.rejected, (state, action) => {
@@ -130,6 +130,9 @@ const authSlice = createSlice({
       .addCase(fetchCurrentUser.rejected, (state, action) => {
         state.status = 'failed';
         state.error = action.payload || 'მომხმარებლის მონაცემების მიღება ვერ მოხერხდა';
+        state.user = null;
+        state.isLoggedIn = false;
+        state.token = null;
       })
       .addCase(updateUserProfile.pending, (state) => {
         state.status = 'loading';
