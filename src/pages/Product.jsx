@@ -1,4 +1,5 @@
-import { useParams, useNavigate,} from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
+import { useState, useEffect } from 'react';
 import laptops from '../data/products/laptops.js';
 import monitors from '../data/products/monitors.js';
 import keyboards from '../data/products/keyboards.js';
@@ -6,17 +7,29 @@ import mouse from '../data/products/mouse.js';
 import headphones from '../data/products/headphones.js';
 import printers from '../data/products/printers.js';
 import gaming from '../data/products/gaming.js';
+import categories from '../data/categories.js';
+import computers from '../data/products/computer.js';
 import { useCart } from '../context/CartContext.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 
 const Product = () => {
-  const { addToCart, cartItemCount } = useCart();
+  const { addToCart } = useCart();
   const { id } = useParams();
-  const allProducts = [...laptops, ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
+  const allProducts = [...laptops, ...monitors,...computers, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
   const product = allProducts.find(p => p.id === parseInt(id));
   const navigate = useNavigate();
 
+  const [mainImage, setMainImage] = useState(product?.images?.[0] || '/default.jpg');
+
+  useEffect(() => {
+    if (product) {
+      setMainImage(product.images?.[0] || '/default.jpg');
+    }
+  }, [product]);
+
   if (!product) return <div>პროდუქტი არ მოიძებნა</div>;
+
+  const category = categories.find(c => c.id === product.categoryId);
 
   const categoryProducts = allProducts.filter(p => p.categoryId === product.categoryId && p.id !== product.id).slice(0, 4);
 
@@ -30,22 +43,20 @@ const Product = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:w-1/2 flex flex-col lg:flex-row gap-4">
           <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto">
-            <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
-            </div>
-            <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
-            </div>
-            <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
-            </div>
-            <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
-            </div>
+            {/* აქ product.images-ს ვიყენებთ */}
+            {product.images && product.images.map((image, index) => (
+              <div
+                key={index}
+                className="w-16 h-16 border rounded-md cursor-pointer p-1"
+                onClick={() => setMainImage(image)}
+              >
+                <img src={image} alt={`${product.name} thumbnail ${index + 1}`} className="w-full h-full object-cover rounded-sm" />
+              </div>
+            ))}
           </div>
           <div className="flex-1 flex justify-center items-center p-4 rounded-lg shadow-md bg-gray-50">
             <img
-              src={product.imageUrl || '/default.jpg'}
+              src={mainImage}
               alt={product.name}
               className="w-full max-w-xl object-contain"
             />
@@ -55,9 +66,10 @@ const Product = () => {
         <div className="lg:w-1/2 flex flex-col gap-4">
           <div className="border-b pb-4">
             <div className="flex items-center justify-between">
-              <h1 className="text-3xl font-bold">{product.name}</h1>
+              {category && <p className="text-sm font-semibold text-blue-500">{category.name}</p>}
               <p className="text-gray-500 text-sm">ID: {product.id}</p>
             </div>
+            <h1 className="text-3xl font-bold">{product.name}</h1>
             <div className="flex items-center mt-2">
               <div className="text-yellow-400">
                 <span className="text-xl">⭐️</span>

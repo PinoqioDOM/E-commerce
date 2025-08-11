@@ -1,4 +1,4 @@
-const products = [
+const printers = [
   {
     id: 701,
     categoryId: 7,
@@ -181,4 +181,4 @@ const products = [
   }
 ];
 
-export default products;
+export default printers;

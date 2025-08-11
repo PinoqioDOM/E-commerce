@@ -1,4 +1,4 @@
-const products = [
+const monitors = [
   {
     id: 301,
     categoryId: 3,
@@ -217,4 +217,4 @@ const products = [
   }
 ];
 
-export default products;
+export default monitors;

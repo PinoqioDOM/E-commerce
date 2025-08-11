@@ -1,4 +1,4 @@
-const products = [
+const gaming = [
   { 
     id: 801, 
     categoryId: 8, 
@@ -181,4 +181,4 @@ const products = [
   }
 ];
 
-export default products;
+export default gaming;

@@ -1,4 +1,4 @@
-const products = [
+const headphones = [
   {
     id: 601,
     categoryId: 6,
@@ -181,4 +181,4 @@ const products = [
   }
 ];
 
-export default products;
+export default headphones;

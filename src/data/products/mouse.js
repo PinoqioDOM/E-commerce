@@ -1,4 +1,4 @@
-const products = [
+const mouse = [
   {
     id: 501,
     categoryId: 5,
@@ -181,4 +181,4 @@ const products = [
   }
 ];
 
-export default products;
+export default mouse;

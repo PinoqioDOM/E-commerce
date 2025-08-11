@@ -7,12 +7,15 @@ import keyboards from '../data/products/keyboards.js';
 import mouse from '../data/products/mouse.js';
 import headphones from '../data/products/headphones.js';
 import printers from '../data/products/printers.js';
+import computers from '../data/products/computer.js'
 import gaming from '../data/products/gaming.js';
 import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext.jsx'; 
 
-const Home = ({ onAddToCart, onAddToWishlist }) => {
+const Home = () => {
   const navigate = useNavigate();
-  const allProducts = [...laptops, ...monitors, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
+  const { addToCart, addToWishlist } = useCart(); 
+  const allProducts = [...laptops, ...monitors,...computers, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
   const scrollContainerRef = useRef(null);
 
   const scrollRight = () => {
@@ -79,39 +82,36 @@ const Home = ({ onAddToCart, onAddToWishlist }) => {
                 )}
               </div>
               
-              {/* Desktop View - Grid Layout */}
               <div className="hidden lg:grid lg:grid-cols-4 gap-10 w-full">
                 {visibleProducts.map((product) => (
                   <ProductCard
                     key={product.id}
-                    product={product}
-                    onAddToCart={onAddToCart}
-                    onAddToWishlist={onAddToWishlist}
+                    product={product} // სწორედ აქ არის გამოსწორებული!
+                    onAddToCart={addToCart}
+                    onAddToWishlist={addToWishlist}
                   />
                 ))}
               </div>
 
-              {/* Tablet View - 2 columns */}
               <div className="hidden md:grid lg:hidden md:grid-cols-2 gap-4">
                 {visibleProducts.map((product) => (
                   <ProductCard
                     key={product.id}
-                    product={product}
-                    onAddToCart={onAddToCart}
-                    onAddToWishlist={onAddToWishlist}
+                    product={product} // სწორედ აქ არის გამოსწორებული!
+                    onAddToCart={addToCart}
+                    onAddToWishlist={addToWishlist}
                   />
                 ))}
               </div>
 
-              {/* Mobile View - Horizontal Scroll */}
               <div className="md:hidden">
                 <div className="flex gap-4 overflow-x-auto pb-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]">
                   {visibleProducts.map((product) => (
                     <div key={product.id} className="flex-shrink-0 w-64">
                       <ProductCard
-                        product={product}
-                        onAddToCart={onAddToCart}
-                        onAddToWishlist={onAddToWishlist}
+                        product={product} // სწორედ აქ არის გამოსწორებული!
+                        onAddToCart={addToCart}
+                        onAddToWishlist={addToWishlist}
                       />
                     </div>
                   ))}

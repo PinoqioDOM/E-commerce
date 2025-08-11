@@ -1,4 +1,4 @@
-const products = [
+const keyboards = [
   {
     id: 401,
     categoryId: 4,
@@ -181,4 +181,4 @@ const products = [
   }
 ];
 
-export default products;
+export default keyboards;

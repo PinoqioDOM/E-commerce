@@ -62,17 +62,6 @@ const FilterComponent = ({ products, onFilterChange }) => {
             <input
               type="radio"
               name="sortOrder"
-              value="none"
-              checked={sortOrder === 'none'}
-              onChange={() => setSortOrder('none')}
-              className="form-radio text-blue-600 h-5 w-5"
-            />
-            <span>ნაგულისხმევი</span>
-          </label>
-          <label className="flex items-center space-x-3 cursor-pointer">
-            <input
-              type="radio"
-              name="sortOrder"
               value="asc"
               checked={sortOrder === 'asc'}
               onChange={() => setSortOrder('asc')}

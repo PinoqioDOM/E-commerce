@@ -1,10 +1,10 @@
-const products = [
+const computers = [
   { 
     id: 201, 
     categoryId: 2, 
     name: 'HP Pavilion Desktop TP01', 
     price: 2500, 
-    images: [ // imageUrl-ის ნაცვლად images მასივი
+    images: [ 
       'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=300&h=300&fit=crop',
       'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=300&h=300&fit=crop',
       'https://images.unsplash.com/photo-1593640495253-23196b27a87f?w=300&h=300&fit=crop',
@@ -199,4 +199,4 @@ const products = [
   }
 ];
 
-export default products;
+export default computers;
