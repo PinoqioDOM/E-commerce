@@ -31,21 +31,21 @@ const Product = () => {
         <div className="lg:w-1/2 flex flex-col lg:flex-row gap-4">
           <div className="flex flex-row lg:flex-col gap-2 overflow-x-auto lg:overflow-y-auto">
             <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageId ? `/images/${product.imageId}.jpg` : '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
+              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
             </div>
             <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageId ? `/images/${product.imageId}.jpg` : '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
+              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
             </div>
             <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageId ? `/images/${product.imageId}.jpg` : '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
+              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
             </div>
             <div className="w-16 h-16 border rounded-md cursor-pointer p-1">
-              <img src={product.imageId ? `/images/${product.imageId}.jpg` : '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
+              <img src={product.imageUrl || '/default.jpg'} alt={product.name} className="w-full h-full object-cover rounded-sm" />
             </div>
           </div>
           <div className="flex-1 flex justify-center items-center p-4 rounded-lg shadow-md bg-gray-50">
             <img
-              src={product.imageId ? `/images/${product.imageId}.jpg` : '/default.jpg'}
+              src={product.imageUrl || '/default.jpg'}
               alt={product.name}
               className="w-full max-w-xl object-contain"
             />
