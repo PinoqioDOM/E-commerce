@@ -28,7 +28,6 @@ export const getProducts = async () => {
   }
 };
 
-// POST პროდუქტის დამატება
 export const addProduct = async (productData) => {
   try {
     const response = await fetch(`${API_BASE_URL}/product`, {
@@ -135,7 +134,6 @@ export const deleteProduct = async (productId) => {
   }
 };
 
-// DELETE ყველა პროდუქტი
 export const deleteAllProducts = async () => {
   try {
     const response = await fetch(`${API_BASE_URL}/product/delete-all`, {

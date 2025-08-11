@@ -1,4 +1,18 @@
 import React, { createContext, useContext, useState, useEffect } from 'react';
+import {
+  getProducts,
+  getProductById,
+  addProduct,
+  updateProduct,
+  deleteProduct,
+} from '../services/productService';
+
+import {
+  getCategories,
+  getCategoryById,
+  addCategory,
+  deleteCategory,
+} from '../services/categoryService';
 
 const CartContext = createContext();
 
@@ -11,12 +25,14 @@ export const useCart = () => {
 };
 
 export const CartProvider = ({ children }) => {
+  const [products, setProducts] = useState([]);
+  const [categories, setCategories] = useState([]);
+
   const [cartItems, setCartItems] = useState(() => {
     try {
       const localData = localStorage.getItem('cartItems');
       return localData ? JSON.parse(localData) : [];
-    } catch (error) {
-      console.error("Failed to parse cartItems from localStorage", error);
+    } catch {
       return [];
     }
   });
@@ -25,22 +41,30 @@ export const CartProvider = ({ children }) => {
     try {
       const localData = localStorage.getItem('wishlistItems');
       return localData ? JSON.parse(localData) : [];
-    } catch (error) {
-      console.error("Failed to parse wishlistItems from localStorage", error);
+    } catch {
       return [];
     }
   });
 
-  const [orders, setOrders] = useState(() => {
-    try {
-      const localData = localStorage.getItem('userOrders');
-      return localData ? JSON.parse(localData) : [];
-    } catch (error) {
-      console.error("Failed to parse userOrders from localStorage", error);
-      return [];
-    }
-  });
+  const [orders, setOrders] = useState([]);
 
+  // პროდუქტის და კატეგორიის წამოღება backend-იდან
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const prodData = await getProducts();
+        setProducts(prodData);
+
+        const catData = await getCategories();
+        setCategories(catData);
+      } catch (error) {
+        console.error('მონაცემების წამოღების შეცდომა:', error);
+      }
+    };
+    fetchData();
+  }, []);
+
+  // localStorage სინქრონიზაცია
   useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems));
   }, [cartItems]);
@@ -49,15 +73,12 @@ export const CartProvider = ({ children }) => {
     localStorage.setItem('wishlistItems', JSON.stringify(wishlistItems));
   }, [wishlistItems]);
 
-  useEffect(() => {
-    localStorage.setItem('userOrders', JSON.stringify(orders));
-  }, [orders]);
-
+  // კალათა
   const addToCart = (product) => {
-    setCartItems(prev => {
-      const existingItem = prev.find(item => item.id === product.id);
+    setCartItems((prev) => {
+      const existingItem = prev.find((item) => item.id === product.id);
       if (existingItem) {
-        return prev.map(item =>
+        return prev.map((item) =>
           item.id === product.id
             ? { ...item, quantity: item.quantity + 1 }
             : item
@@ -68,7 +89,7 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromCart = (productId) => {
-    setCartItems(prev => prev.filter(item => item.id !== productId));
+    setCartItems((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const clearCart = () => {
@@ -76,8 +97,8 @@ export const CartProvider = ({ children }) => {
   };
 
   const addToWishlist = (product) => {
-    setWishlistItems(prev => {
-      if (prev.find(item => item.id === product.id)) {
+    setWishlistItems((prev) => {
+      if (prev.find((item) => item.id === product.id)) {
         return prev;
       }
       return [...prev, product];
@@ -85,24 +106,35 @@ export const CartProvider = ({ children }) => {
   };
 
   const removeFromWishlist = (productId) => {
-    setWishlistItems(prev => prev.filter(item => item.id !== productId));
+    setWishlistItems((prev) => prev.filter((item) => item.id !== productId));
   };
 
   const addOrder = (order) => {
-    setOrders(prevOrders => [...prevOrders, order]);
+    setOrders((prevOrders) => [...prevOrders, order]);
   };
 
   const value = {
+    products,
+    categories,
     cartItems,
     wishlistItems,
-    orders, 
+    orders,
     addToCart,
     removeFromCart,
     clearCart,
     addToWishlist,
     removeFromWishlist,
-    addOrder, 
-    cartItemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0)
+    addOrder,
+    cartItemCount: cartItems.reduce((sum, item) => sum + item.quantity, 0),
+
+    getProductById,
+    addProduct,
+    updateProduct,
+    deleteProduct,
+
+    getCategoryById,
+    addCategory,
+    deleteCategory,
   };
 
   return (
