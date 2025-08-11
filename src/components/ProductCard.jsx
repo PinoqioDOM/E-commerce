@@ -1,24 +1,24 @@
-import React from 'react'
-import { useNavigate } from 'react-router-dom'
-import { useCart } from '../context/CartContext'
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useCart } from '../context/CartContext';
 
 const ProductCard = ({ product }) => {
-  const navigate = useNavigate()
-  const { addToCart, addToWishlist } = useCart()
+  const navigate = useNavigate();
+  const { addToCart, addToWishlist } = useCart();
 
   const handleClick = () => {
-    navigate(`/product/${product.id}`)
-  }
+    navigate(`/product/${product.id}`);
+  };
 
   const handleAddToCart = (e) => {
-    e.stopPropagation()
-    addToCart(product)
-  }
+    e.stopPropagation();
+    addToCart(product);
+  };
 
   const handleAddToWishlist = (e) => {
-    e.stopPropagation()
-    addToWishlist(product)
-  }
+    e.stopPropagation();
+    addToWishlist(product);
+  };
 
   const imageUrl = product.images?.[0] || '/default.jpg';
 
@@ -38,7 +38,7 @@ const ProductCard = ({ product }) => {
         </button>
       </div>
     </div>
-  )
-}
+  );
+};
 
-export default ProductCard
+export default ProductCard;

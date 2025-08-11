@@ -7,7 +7,7 @@ import keyboards from '../data/products/keyboards.js';
 import mouse from '../data/products/mouse.js';
 import headphones from '../data/products/headphones.js';
 import printers from '../data/products/printers.js';
-import computers from '../data/products/computer.js'
+import computers from '../data/products/computer.js';
 import gaming from '../data/products/gaming.js';
 import { useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext.jsx'; 
