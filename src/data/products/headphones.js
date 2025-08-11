@@ -4,7 +4,12 @@ const products = [
     categoryId: 6,
     name: 'Sony WH-1000XM5',
     price: 1200,
-    imageUrl: 'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop'
+    ],
     description: [
       'მრეწველობის წამყვანი ხმაურის ჩახშობა',
       'გამორჩეული ხმის ხარისხი და ბრწყინვალე ზარები',
@@ -17,7 +22,12 @@ const products = [
     categoryId: 6,
     name: 'Bose QuietComfort 45',
     price: 1000,
-    imageUrl: 'https://images.unsplash.com/photo-1600868884940-0255c4d0a13e?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1600868884940-0255c4d0a13e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1600868884940-0255c4d0a13e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1600868884940-0255c4d0a13e?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1600868884940-0255c4d0a13e?w=300&h=300&fit=crop'
+    ],
     description: [
       'ხმაურის ჩახშობის Acoustic Noise Cancelling ტექნოლოგია',
       'Quiet და Aware რეჟიმები გარემოსთან ადაპტაციისთვის',
@@ -30,7 +40,12 @@ const products = [
     categoryId: 6,
     name: 'JBL Live 660NC',
     price: 500,
-    imageUrl: 'https://images.unsplash.com/photo-1616763355549-d3e91d9e9c15?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1616763355549-d3e91d9e9c15?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355549-d3e91d9e9c15?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355549-d3e91d9e9c15?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355549-d3e91d9e9c15?w=300&h=300&fit=crop'
+    ],
     description: [
       'ადაპტირებადი ხმაურის ჩახშობა (Adaptive Noise Cancelling)',
       'ძლიერი 40მმ დრაივერები JBL Signature Sound-ით',
@@ -43,7 +58,12 @@ const products = [
     categoryId: 6,
     name: 'Razer Barracuda X',
     price: 400,
-    imageUrl: 'https://images.unsplash.com/photo-1596707328018-09ac212555eb?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1596707328018-09ac212555eb?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1596707328018-09ac212555eb?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1596707328018-09ac212555eb?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1596707328018-09ac212555eb?w=300&h=300&fit=crop'
+    ],
     description: [
       'მრავალფუნქციური უკაბელო გეიმინგ ყურსასმენი',
       'Razer TriForce 40მმ დრაივერები',
@@ -56,7 +76,12 @@ const products = [
     categoryId: 6,
     name: 'Sony WF-1000XM4',
     price: 800,
-    imageUrl: 'https://images.unsplash.com/photo-1620950346395-65492ac6b9a8?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1620950346395-65492ac6b9a8?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1620950346395-65492ac6b9a8?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1620950346395-65492ac6b9a8?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1620950346395-65492ac6b9a8?w=300&h=300&fit=crop'
+    ],
     description: [
       'წამყვანი ციფრული ხმაურის ჩახშობა',
       'ახალი Integrated Processor V1',
@@ -69,7 +94,12 @@ const products = [
     categoryId: 6,
     name: 'Apple AirPods Pro 2',
     price: 900,
-    imageUrl: 'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1629221191060-6a2c262a6a24?w=300&h=300&fit=crop'
+    ],
     description: [
       '2x უფრო აქტიური ხმაურის ჩახშობა',
       'ადაპტირებადი აუდიო და სივრცითი აუდიო (Spatial Audio)',
@@ -82,7 +112,12 @@ const products = [
     categoryId: 6,
     name: 'Sennheiser HD 450BT',
     price: 600,
-    imageUrl: 'https://images.unsplash.com/photo-1599878233379-3c72782b6b55?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1599878233379-3c72782b6b55?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1599878233379-3c72782b6b55?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1599878233379-3c72782b6b55?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1599878233379-3c72782b6b55?w=300&h=300&fit=crop'
+    ],
     description: [
       'აქტიური ხმაურის ჩახშობა',
       '30 საათამდე ბატარეის ხანგრძლივობა',
@@ -95,7 +130,12 @@ const products = [
     categoryId: 6,
     name: 'HyperX Cloud Alpha',
     price: 350,
-    imageUrl: 'https://images.unsplash.com/photo-1632766520337-128a3915151b?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1632766520337-128a3915151b?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1632766520337-128a3915151b?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1632766520337-128a3915151b?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1632766520337-128a3915151b?w=300&h=300&fit=crop'
+    ],
     description: [
       'HyperX Dual Chamber დრაივერები',
       'ხმაურის ჩამხშობი, მოხსნადი მიკროფონი',
@@ -108,7 +148,12 @@ const products = [
     categoryId: 6,
     name: 'Anker Soundcore Q30',
     price: 300,
-    imageUrl: 'https://images.unsplash.com/photo-1616763355605-e11559815031?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1616763355605-e11559815031?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355605-e11559815031?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355605-e11559815031?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1616763355605-e11559815031?w=300&h=300&fit=crop'
+    ],
     description: [
       'ჰიბრიდული აქტიური ხმაურის ჩახშობა',
       'რამდენიმე რეჟიმი (ტრანსპორტი, გარე, შიდა)',
@@ -121,7 +166,12 @@ const products = [
     categoryId: 6,
     name: 'SteelSeries Arctis 7',
     price: 450,
-    imageUrl: 'https://images.unsplash.com/photo-1631580971032-4d1d6a6c1171?w=300&h=300&fit=crop',
+    images: [
+      'https://images.unsplash.com/photo-1631580971032-4d1d6a6c1171?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1631580971032-4d1d6a6c1171?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1631580971032-4d1d6a6c1171?w=300&h=300&fit=crop',
+      'https://images.unsplash.com/photo-1631580971032-4d1d6a6c1171?w=300&h=300&fit=crop'
+    ],
     description: [
       'უკაბელო გეიმინგ ყურსასმენი',
       'Discord-ის მიერ სერტიფიცირებული ClearCast მიკროფონი',
