@@ -86,7 +86,7 @@ const Home = () => {
                 {visibleProducts.map((product) => (
                   <ProductCard
                     key={product.id}
-                    product={product} // სწორედ აქ არის გამოსწორებული!
+                    product={product}
                     onAddToCart={addToCart}
                     onAddToWishlist={addToWishlist}
                   />
@@ -97,7 +97,7 @@ const Home = () => {
                 {visibleProducts.map((product) => (
                   <ProductCard
                     key={product.id}
-                    product={product} // სწორედ აქ არის გამოსწორებული!
+                    product={product}
                     onAddToCart={addToCart}
                     onAddToWishlist={addToWishlist}
                   />
@@ -109,7 +109,7 @@ const Home = () => {
                   {visibleProducts.map((product) => (
                     <div key={product.id} className="flex-shrink-0 w-64">
                       <ProductCard
-                        product={product} // სწორედ აქ არის გამოსწორებული!
+                        product={product}
                         onAddToCart={addToCart}
                         onAddToWishlist={addToWishlist}
                       />

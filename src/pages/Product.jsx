@@ -12,8 +12,9 @@ import computers from '../data/products/computer.js';
 import { useCart } from '../context/CartContext.jsx';
 import ProductCard from '../components/ProductCard.jsx';
 
-const Product = () => {
-  const { addToCart } = useCart();
+// მიიღეთ isLoggedIn და onShowLoginModal props-ად
+const Product = ({ isLoggedIn, onShowLoginModal }) => {
+  const { addToCart, addToWishlist } = useCart(); // დაამატეთ addToWishlist
   const { id } = useParams();
   const allProducts = [...laptops, ...monitors,...computers, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
   const product = allProducts.find(p => p.id === parseInt(id));
@@ -123,7 +124,7 @@ const Product = () => {
           </div>
         </div>
       </div>
-      
+
       {categoryProducts.length > 0 && (
         <div className="w-full mt-8">
           <h2 className="text-2xl font-bold mb-4">მსგავსი პროდუქტები</h2>
@@ -133,6 +134,9 @@ const Product = () => {
                 key={p.id}
                 product={p}
                 onAddToCart={addToCart}
+                onAddToWishlist={addToWishlist}
+                isLoggedIn={isLoggedIn} 
+                onShowLoginModal={onShowLoginModal} 
               />
             ))}
           </div>
