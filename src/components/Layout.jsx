@@ -1,12 +1,12 @@
 import React, { useState, useRef } from 'react';
-import { Outlet, useNavigate, useLocation } from 'react-router-dom'; // დავამატე useLocation
+import { Outlet, useNavigate, useLocation } from 'react-router-dom'; 
 import Header from './Header';
 import Footer from './Footer';
 import categories from '../data/categories.js';
 
 const Layout = () => {
     const navigate = useNavigate();
-    const location = useLocation(); // დავიჭირე მიმდინარე ლოკაცია
+    const location = useLocation();
     const scrollContainerRef = useRef(null);
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [selectedCategoryName, setSelectedCategoryName] = useState("აირჩიეთ კატეგორია");
@@ -30,7 +30,7 @@ const Layout = () => {
         setIsMenuOpen(false);
     };
 
-    const isCategoryPage = location.pathname.startsWith('/category'); // ვამოწმებ კატეგორიის გვერდზე ვართ თუ არა
+    const isCategoryPage = location.pathname.startsWith('/category'); 
 
     React.useEffect(() => {
         const handleClickOutside = (event) => {
@@ -48,7 +48,7 @@ const Layout = () => {
         <div>
             <Header />
 
-            {/* კატეგორიების სქროლი დიდი ეკრანებისთვის - იმალება კატეგორიის გვერდზე */}
+            {/* კატეგორიების სქროლი დიდი ეკრანებისთვის*/}
             {!isCategoryPage && (
                 <div className="relative flex items-center mb-8 px-4 max-w-7xl mx-auto hidden md:flex">
                     <button
@@ -80,7 +80,7 @@ const Layout = () => {
                 </div>
             )}
 
-            {/* საბაჟო Dropdown მენიუ პატარა ეკრანებისთვის - იმალება კატეგორიის გვერდზე */}
+            {/*Dropdown მენიუ პატარა ეკრანებისთვის */}
             {!isCategoryPage && (
                 <div className="md:hidden p-4 relative mx-auto max-w-xs" ref={dropdownRef}>
                     <div

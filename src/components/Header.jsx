@@ -38,7 +38,6 @@ const Header = () => {
   return (
     <div className="relative">
       <div className="flex items-center justify-between px-4 py-2 bg-[#90EE90] relative md:justify-center md:gap-8">
-        {/* ლოგო - ყოველთვის ჩანს */}
         <Link to="/">
           <img src={Logo} alt="Veli Logo" className="w-[120px] md:w-[150px] cursor-pointer" />
         </Link>
@@ -73,7 +72,6 @@ const Header = () => {
                 isOpen={isCartOpen}
                 onClose={handleCloseCart}
                 cartButtonRef={cartButtonRef}
-                // cartItems prop-ი აქ აღარ არის საჭირო, რადგან CartModal იყენებს useCart-ს
                 onRemoveProduct={removeFromCart}
               />
             )}

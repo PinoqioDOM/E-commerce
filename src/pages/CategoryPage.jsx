@@ -86,10 +86,9 @@ const CategoryPage = () => {
       {/* ეს კონტეინერი მართავს ფილტრისა და პროდუქტების სიის განლაგებას */}
       <div className="flex flex-col lg:flex-row gap-8">
         
-        {/* ფილტრის კომპონენტი */}
         <FilterComponent products={allProducts} onFilterChange={handleFilterChange} />
         
-        {/* პროდუქტების სია - მობილურზე და ტაბლეტზე მთელ სიგანეზე გაიშლება */}
+        {/* პროდუქტების სია - მობილურზე და ტაბლეტზე */}
         <div className="flex-grow">
           {filteredProducts.length === 0 ? (
             <div className="p-4 text-center">ამ კრიტერიუმებით პროდუქტი არ მოიძებნა.</div>

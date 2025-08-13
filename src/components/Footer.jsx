@@ -11,7 +11,7 @@ const Footer = () => {
           className="w-[150px] cursor-pointer"
         />
 
-        <p className="text-2xl font-bold text-black cursor-pointer">
+        <p className="text-xl font-bold text-black cursor-pointer">
           "ადგილი სადაც მუდამ გელიან"
         </p>
       </div>
