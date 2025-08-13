@@ -16,52 +16,13 @@ const Home = () => {
   const navigate = useNavigate();
   const { addToCart, addToWishlist } = useCart(); 
   const allProducts = [...laptops, ...monitors,...computers, ...keyboards, ...mouse, ...headphones, ...printers, ...gaming];
-  const scrollContainerRef = useRef(null);
-
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
-  };
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-    }
-  };
 
   return (
-    <div className="p-4">
-      <h1 className="text-3xl font-bold mb-6">კატეგორიები</h1>
-
-      <div className="relative flex items-center mb-8">
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 z-10 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 hidden md:block"
-        >
-          <span className="text-xl">&lt;</span>
-        </button>
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              onClick={() => navigate(`/category/${category.id}`)}
-              className="flex-shrink-0 w-48 h-32 bg-gray-200 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors"
-            >
-              <span className="text-lg font-semibold">{category.name}</span>
-            </div>
-          ))}
-        </div>
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 z-10 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 hidden md:block"
-        >
-          <span className="text-xl">&gt;</span>
-        </button>
-      </div>
+    <div className="p-4 max-w-7xl mx-auto">
+      {/* აქ ადრე იყო კატეგორიების სქროლი, რომელიც გადავიტანეთ Layout-ში,
+        ამიტომ აქედან წაიშალა.
+      */}
+      <h1 className="text-3xl font-bold mb-6">პროდუქტები</h1>
 
       {categories.map((category) => {
         const categoryProducts = allProducts.filter(p => p.categoryId === category.id);
