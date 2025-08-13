@@ -1,17 +1,17 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
-import categories from '../data/categories.js';
-import FilterComponent from '../components/FilterComponent.jsx'; 
+import { useCart } from '../context/CartContext.jsx';
+import FilterComponent from '../components/FilterComponent.jsx';
 
-const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
+const CategoryPage = () => {
   const { id } = useParams();
   const [allProducts, setAllProducts] = useState([]);
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryName, setCategoryName] = useState('პროდუქტები');
   const [isLoading, setIsLoading] = useState(true);
-  const scrollContainerRef = useRef(null);
   const navigate = useNavigate();
+  const { addToCart, addToWishlist } = useCart();
 
   useEffect(() => {
     const fetchProducts = async () => {
@@ -26,7 +26,7 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
             break;
           case '2':
             module = await import('../data/products/computer.js');
-            name = 'კომპიუტერბი';
+            name = 'კომპიუტერები';
             break;
           case '3':
             module = await import('../data/products/monitors.js');
@@ -71,18 +71,6 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
     fetchProducts();
   }, [id]);
 
-  const scrollRight = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
-    }
-  };
-
-  const scrollLeft = () => {
-    if (scrollContainerRef.current) {
-      scrollContainerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
-    }
-  };
-
   const handleFilterChange = (newProducts) => {
     setFilteredProducts(newProducts);
   };
@@ -93,54 +81,26 @@ const CategoryPage = ({ onAddToCart, onAddToWishlist }) => {
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
-      {/* კატეგორიების სქროლი */}
-      <div className="relative flex items-center mb-8">
-        <button
-          onClick={scrollLeft}
-          className="absolute left-0 z-10 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 hidden md:block"
-        >
-          <span className="text-xl">&lt;</span>
-        </button>
-        <div
-          ref={scrollContainerRef}
-          className="flex gap-4 overflow-x-auto py-2 [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none] [scrollbar-width:none]"
-        >
-          {categories.map((category) => (
-            <div
-              key={category.id}
-              onClick={() => navigate(`/category/${category.id}`)}
-              className="flex-shrink-0 w-48 h-32 bg-gray-200 rounded-lg flex items-center justify-center cursor-pointer hover:bg-gray-300 transition-colors"
-            >
-              <span className="text-lg font-semibold">{category.name}</span>
-            </div>
-          ))}
-        </div>
-        <button
-          onClick={scrollRight}
-          className="absolute right-0 z-10 p-3 bg-white rounded-full shadow-lg text-gray-800 hover:bg-gray-100 hidden md:block"
-        >
-          <span className="text-xl">&gt;</span>
-        </button>
-      </div>
-
       <h1 className="text-3xl font-bold mb-6">{categoryName}</h1>
 
-      <div className="flex gap-8">
-        {/* ფილტრის კომპონენტის გამოძახება */}
+      {/* ეს კონტეინერი მართავს ფილტრისა და პროდუქტების სიის განლაგებას */}
+      <div className="flex flex-col lg:flex-row gap-8">
+        
+        {/* ფილტრის კომპონენტი */}
         <FilterComponent products={allProducts} onFilterChange={handleFilterChange} />
         
-        {/* პროდუქტების სია */}
+        {/* პროდუქტების სია - მობილურზე და ტაბლეტზე მთელ სიგანეზე გაიშლება */}
         <div className="flex-grow">
           {filteredProducts.length === 0 ? (
             <div className="p-4 text-center">ამ კრიტერიუმებით პროდუქტი არ მოიძებნა.</div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}
                   product={product}
-                  onAddToCart={onAddToCart}
-                  onAddToWishlist={onAddToWishlist}
+                  onAddToCart={addToCart}
+                  onAddToWishlist={addToWishlist}
                 />
               ))}
             </div>
