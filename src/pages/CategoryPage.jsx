@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 import ProductCard from '../components/ProductCard';
 import { useCart } from '../context/CartContext.jsx';
 import FilterComponent from '../components/FilterComponent.jsx';
@@ -10,7 +10,6 @@ const CategoryPage = () => {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [categoryName, setCategoryName] = useState('პროდუქტები');
   const [isLoading, setIsLoading] = useState(true);
-  const navigate = useNavigate();
   const { addToCart, addToWishlist } = useCart();
 
   useEffect(() => {
@@ -81,19 +80,20 @@ const CategoryPage = () => {
 
   return (
     <div className="p-4 max-w-7xl mx-auto">
-      <h1 className="text-3xl font-bold mb-6">{categoryName}</h1>
+      <h1 className="text-2xl sm:text-3xl font-bold mb-6">{categoryName}</h1>
 
-      {/* ეს კონტეინერი მართავს ფილტრისა და პროდუქტების სიის განლაგებას */}
       <div className="flex flex-col lg:flex-row gap-8">
-        
-        <FilterComponent products={allProducts} onFilterChange={handleFilterChange} />
-        
-        {/* პროდუქტების სია - მობილურზე და ტაბლეტზე */}
+        {/* ფილტრი */}
+        <div className="w-full lg:w-64 flex-shrink-0">
+          <FilterComponent products={allProducts} onFilterChange={handleFilterChange} />
+        </div>
+
+        {/* პროდუქტების სია */}
         <div className="flex-grow">
           {filteredProducts.length === 0 ? (
             <div className="p-4 text-center">ამ კრიტერიუმებით პროდუქტი არ მოიძებნა.</div>
           ) : (
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-2 xl:grid-cols-3 gap-6">
               {filteredProducts.map((product) => (
                 <ProductCard
                   key={product.id}

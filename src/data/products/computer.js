@@ -20,13 +20,12 @@ const computers = [
   { 
     id: 202, 
     categoryId: 2, 
-    name: 'Dell XPS 8960 Desktop', 
+    name: 'Acer Aspire Vero', 
     price: 2800, 
     images: [
-      'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2025/02/ACER-2-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/02/ACER-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/02/ACER-3-01.png',
     ],
     description: [
       'Intel Core i7-13700 პროცესორი 16-core წარმადობით',
@@ -38,13 +37,11 @@ const computers = [
   { 
     id: 203, 
     categoryId: 2, 
-    name: 'HP Z2 Tower G9 Workstation', 
+    name: 'Apple MacBook Pro 14″', 
     price: 2200, 
     images: [
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1558618047-3c8c76ca7d13?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2024/11/MACBOOK-PRO-M2-PRO-1-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/11/MACBOOK-PRO-M2-PRO-01.png',
     ],
     description: [
       'Intel Xeon W-1350 პროცესორი პროფესიონალური სამუშაოებისთვის',
@@ -56,13 +53,13 @@ const computers = [
   { 
     id: 204, 
     categoryId: 2, 
-    name: 'NZXT BLD Gaming PC', 
+    name: 'Asus Vivobook 15 OLED', 
     price: 4500, 
     images: [
-      'https://images.unsplash.com/photo-1591238371164-c42ef2b3b5d8?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1591238371164-c42ef2b3b5d8?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1591238371164-c42ef2b3b5d8?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1591238371164-c42ef2b3b5d8?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2024/02/vivobook-16-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/02/vivobook-16-1-01.png',
+      'https://gstore.ge/product/asus-vivobook-15-oled-x1505va-l1594/',
+      'https://gstore.ge/wp-content/uploads/2024/02/vivobook-16-3-01.png'
     ],
     description: [
       'AMD Ryzen 7 7800X3D გეიმინგ პროცესორი',
@@ -74,13 +71,13 @@ const computers = [
   { 
     id: 205, 
     categoryId: 2, 
-    name: 'Microsoft Surface Studio 2+', 
+    name: 'Asus Vivobook S16', 
     price: 2000, 
     images: [
-      'https://images.unsplash.com/photo-1595429035839-c99c298ffdde?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1595429035839-c99c298ffdde?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1595429035839-c99c298ffdde?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1595429035839-c99c298ffdde?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2024/10/asus-vivobook-1-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/10/asus-vivobook-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/10/asus-vivobook-2-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/10/asus-vivobook-3-01.png'
     ],
     description: [
       '28-inch PixelSense Flow სენსორული დისპლეი',
@@ -92,13 +89,12 @@ const computers = [
   { 
     id: 206, 
     categoryId: 2, 
-    name: 'Alienware Aurora R15 Gaming', 
+    name: 'Dell Inspiron 14″', 
     price: 3800, 
     images: [
-      'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1587831990711-23ca6441447b?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2025/06/dell-1-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/06/dell-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/06/dell-2-01.png',
     ],
     description: [
       'Intel Core i9-12900F 16-core პროცესორი',
@@ -110,13 +106,12 @@ const computers = [
   { 
     id: 207, 
     categoryId: 2, 
-    name: 'Origin PC Genesis Desktop', 
+    name: 'HP B69B1ET EliteBook X G1i', 
     price: 5200, 
     images: [
-      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1560472354-b33ff0c44a43?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2025/07/128GB-min-2-14.png',
+      'https://gstore.ge/wp-content/uploads/2025/07/noutbuqi-hp-b69b2et-elitebook-x-g1i-14-ultra-7-258v-32gb-1tb-ssd-integrated-w11p-atmospheric-blue-3.jpg',
+      'https://gstore.ge/wp-content/uploads/2025/07/noutbuqi-hp-b69b2et-elitebook-x-g1i-14-ultra-7-258v-32gb-1tb-ssd-integrated-w11p-atmospheric-blue-4.jpg',
     ],
     description: [
       'Intel Core i9-13900K ორ-ჩიპ კონფიგურაცია',
@@ -128,12 +123,12 @@ const computers = [
   { 
     id: 208, 
     categoryId: 2, 
-    name: 'Mac Pro Tower M2 Ultra', 
+    name: 'Lenovo Thinkbook 16 ', 
     price: 3500, 
     images: [
-      'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop',
+      'https://gstore.ge/wp-content/uploads/2025/06/tyytt-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/06/rtetrtetrer-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/06/tyrteyr-01.png',
       'https://images.unsplash.com/photo-1518717758536-85ae29035b6d?w=300&h=300&fit=crop'
     ],
     description: [
@@ -146,13 +141,12 @@ const computers = [
   { 
     id: 209, 
     categoryId: 2, 
-    name: 'ASUS ProArt Station PD5', 
+    name: 'Lenovo Yoga 7 16″', 
     price: 4000, 
     images: [
-      'https://images.unsplash.com/photo-1624571409659-2c1e0bfa9f84?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1624571409659-2c1e0bfa9f84?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1624571409659-2c1e0bfa9f84?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1624571409659-2c1e0bfa9f84?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2024/08/LENOVO-YOGA-13-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/08/LENOVO-YOGA-1-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/08/LENOVO-YOGA-11-01.png',
     ],
     description: [
       'Intel Xeon W-2245 პროცესორი კრეატიული სამუშაოებისთვის',
@@ -164,13 +158,12 @@ const computers = [
   { 
     id: 210, 
     categoryId: 2, 
-    name: 'Framework Desktop DIY Edition', 
+    name: 'Macbook Air 13', 
     price: 2700, 
     images: [
-      'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1612198188060-c7c2a3b66eae?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2024/04/mac-air-m1-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/04/mac-air-m1-1-01.png',
+      'https://gstore.ge/wp-content/uploads/2024/04/mac-air-m1-2-01.png',
     ],
     description: [
       'Intel Core i5-13600K მოდულარული დიზაინით',
@@ -182,13 +175,12 @@ const computers = [
   { 
     id: 211, 
     categoryId: 2, 
-    name: 'Falcon Northwest Talon Gaming PC', 
+    name: 'Microsoft Surface Laptop 7', 
     price: 4800, 
     images: [
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop',
-      'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=300&h=300&fit=crop'
+      'https://gstore.ge/wp-content/uploads/2025/04/surface-7-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/04/surface-9-01.png',
+      'https://gstore.ge/wp-content/uploads/2025/04/surface-8-01.png',
     ],
     description: [
       'AMD Ryzen 9 7950X3D გეიმინგ ოპტიმიზებული პროცესორი',

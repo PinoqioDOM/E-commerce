@@ -48,18 +48,18 @@ const Product = ({ isLoggedIn, onShowLoginModal }) => {
             {product.images && product.images.map((image, index) => (
               <div
                 key={index}
-                className="w-16 h-16 min-w-[64px] border rounded-md cursor-pointer p-1"
+                className="w-16 h-16 min-w-[64px]  rounded-md cursor-pointer p-1"
                 onClick={() => setMainImage(image)}
               >
                 <img src={image} alt={`${product.name} thumbnail ${index + 1}`} className="w-full h-full object-cover rounded-sm" />
               </div>
             ))}
           </div>
-          <div className="flex-1 flex justify-center items-center p-2 sm:p-3 rounded-lg shadow-md bg-gray-50">
+          <div className="flex-1 flex justify-center items-center p-2 sm:p-3 rounded-lg">
             <img
               src={mainImage}
               alt={product.name}
-              className="w-full max-w-[250px] sm:max-w-[350px] md:max-w-[450px] lg:max-w-[600px] h-auto object-contain"
+              className="w-full max-w-[250px] sm:max-w-[350px] md:max-w-[450px] lg:max-w-[600px] h-auto object-contain border-none shadow-none"
               loading="lazy"
             />
           </div>
